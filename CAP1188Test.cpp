@@ -15,7 +15,8 @@
  ****************************************************/
  
 #include <Adafruit_CAP1188.h>
-#include <iostream>
+#include <wiringPiI2C.h>
+#include <stdio.h>
 
 // Reset Pin is used for I2C or SPI
 #define CAP1188_RESET  9
@@ -66,7 +67,7 @@ int main() {
     for (uint8_t i=0; i<8; i++) {
       if (touched & (1 << i)) {
         printf("C"); 
-        printf(i+1); 
+        printf(str(i+1)); 
         printf("\t");
       }
     }
@@ -74,5 +75,5 @@ int main() {
     delay(50);
     }
   }
-  return 0
+  return 0;
 }

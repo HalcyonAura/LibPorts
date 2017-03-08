@@ -29,6 +29,8 @@
 //If using I2C library
 #include <wiringPiI2C.h>
 
+#include <stdint.h>
+
 // The default I2C address
 #define CAP1188_I2CADDR 0x29
 
@@ -64,6 +66,6 @@ class Adafruit_CAP1188 {
 
  private:
   //uint8_t spixfer(uint8_t x);
-  boolean _i2c;
+  bool _i2c;
   int8_t _i2caddr, _resetpin, _cs, _clk, _mosi, _miso;
 };

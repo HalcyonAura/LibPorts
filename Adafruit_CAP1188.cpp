@@ -15,7 +15,7 @@
  ****************************************************/
 
 #include "Adafruit_CAP1188.h"
-#include <iostream>
+#include <stdio.h>
 
 // If the SPI library has transaction support, these functions
 // establish settings and protect from interference from other
@@ -64,7 +64,7 @@ Adafruit_CAP1188::Adafruit_CAP1188(int8_t clkpin, int8_t misopin,
   _i2c = false;
 }
 
-boolean Adafruit_CAP1188::begin(uint8_t i2caddr) {
+bool Adafruit_CAP1188::begin(uint8_t i2caddr) {
   //I2C implementation
   if (_i2c) {
     //Wire.begin();
