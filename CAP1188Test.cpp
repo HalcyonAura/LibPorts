@@ -67,7 +67,7 @@ int main() {
     for (uint8_t i=0; i<8; i++) {
       if (touched & (1 << i)) {
         printf("C"); 
-        printf(str(i+1)); 
+        printf("%d", (i+1)); 
         printf("\t");
       }
     }

@@ -58,7 +58,7 @@ class Adafruit_CAP1188 {
   // Hardware I2C
   Adafruit_CAP1188(int8_t resetpin = -1);
 
-  boolean begin(uint8_t i2caddr = CAP1188_I2CADDR);
+  bool begin(uint8_t i2caddr = CAP1188_I2CADDR);
   uint8_t readRegister(uint8_t reg);
   void writeRegister(uint8_t reg, uint8_t value);
   uint8_t touched(void);
