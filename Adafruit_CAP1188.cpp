@@ -15,6 +15,8 @@
  ****************************************************/
 
 #include "Adafruit_CAP1188.h"
+#include <wiringPi.h>
+#include <wiringPiI2C.h>
 #include <stdio.h>
 
 // If the SPI library has transaction support, these functions
@@ -114,14 +116,14 @@ bool Adafruit_CAP1188::begin(uint8_t i2caddr) {
   Serial.print("Revision: 0x");
   Serial.println(readRegister(CAP1188_REV), HEX);
   */
-  printf("Product ID: 0x");
-  printf(readRegister(CAP1188_PRODID), HEX);
+  /*printf("Product ID: 0x");
+  printf(readRegister(CAP1188_PRODID));
   printf("\nManuf. ID: 0x");
-  printf(readRegister(CAP1188_MANUID), HEX);
+  printf(readRegister(CAP1188_MANUID));
   printf("\nRevision: 0x");
-  printf(readRegister(CAP1188_REV), HEX);
+  printf(readRegister(CAP1188_REV));
   printf("\n");
-
+*/
   if ( (readRegister(CAP1188_PRODID) != 0x50) ||
        (readRegister(CAP1188_MANUID) != 0x5D) ||
        (readRegister(CAP1188_REV) != 0x83)) {
