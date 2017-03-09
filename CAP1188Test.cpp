@@ -15,6 +15,7 @@
  ****************************************************/
  
 #include <Adafruit_CAP1188.h>
+#include <wiringPi.h>
 #include <wiringPiI2C.h>
 #include <stdio.h>
 
@@ -50,29 +51,30 @@ Adafruit_CAP1188 cap = Adafruit_CAP1188();
 void setup() {
   //Serial.begin(9600);
   printf("CAP1188 test!");
-
+  wiringPiSetup();
   // Initialize the sensor, if using i2c you can pass in the i2c address
   if (!cap.begin(0x28)) {
   //if (!cap.begin()) {
     printf("CAP1188 not found\n");
-    while (1);
   }
-  printf("CAP1188 found!\n");
+  else{
+    printf("CAP1188 found!\n");
+  }
 }
 
 int main() {
   while(1){
     uint8_t touched = cap.touched();
     if (touched!=0){
-    for (uint8_t i=0; i<8; i++) {
-      if (touched & (1 << i)) {
-        printf("C"); 
-        printf("%d", (i+1)); 
-        printf("\t");
+      for (uint8_t i=0; i<8; i++) {
+        if (touched & (1 << i)) {
+          printf("C"); 
+          printf("%d", (i+1)); 
+          printf("\t");
+        }
       }
-    }
-    printf("\n");
-    delay(50);
+      printf("\n");
+      delay(50);
     }
   }
   return 0;
