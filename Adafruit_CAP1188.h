@@ -26,9 +26,6 @@
 //If using SPI library
 #include <wiringPiSPI.h>
 
-//If using I2C library
-#include <wiringPiI2C.h>
-
 #include <stdint.h>
 
 // The default I2C address
@@ -49,23 +46,16 @@
 
 class Adafruit_CAP1188 {
  public:
-  // Software SPI
-  Adafruit_CAP1188(int8_t clkpin, int8_t misopin, 
-		   int8_t mosipin,int8_t cspin, 
-		   int8_t resetpin);
-  // Hardware SPI
-  Adafruit_CAP1188(int8_t cspin, int8_t resetpin);
   // Hardware I2C
   Adafruit_CAP1188(int8_t resetpin = -1);
 
-  bool begin(uint8_t i2caddr = CAP1188_I2CADDR);
-  uint8_t readRegister(uint8_t reg);
-  void writeRegister(uint8_t reg, uint8_t value);
-  uint8_t touched(void);
-  void LEDpolarity(uint8_t x);
+  bool begin(int i2caddr = CAP1188_I2CADDR);
+  int readRegister(int reg);
+  void writeRegister(int reg, int value);
+  int touched(void);
+  void LEDpolarity(int x);
 
  private:
-  //uint8_t spixfer(uint8_t x);
   bool _i2c;
   int8_t _i2caddr, _resetpin, _cs, _clk, _mosi, _miso;
 };
