@@ -14,13 +14,13 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
  
-#include <Adafruit_CAP1188.h>
+#include "Adafruit_CAP1188.h"
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
 #include <stdio.h>
 
 // Reset Pin is used for I2C or SPI
-#define CAP1188_RESET  9
+#define CAP1188_RESET  29
 
 // CS pin is used for software or hardware SPI
 #define CAP1188_CS  10
@@ -64,6 +64,7 @@ void setup() {
 
 int main() {
   while(1){
+    setup();
     uint8_t touched = cap.touched();
     if (touched!=0){
       for (uint8_t i=0; i<8; i++) {

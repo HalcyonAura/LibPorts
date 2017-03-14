@@ -16,23 +16,16 @@
 
 #include "Adafruit_CAP1188.h"
 #include <wiringPi.h>
+#include <wiringPiI2C.h>
 #include <stdio.h>
 
-Adafruit_CAP1188::Adafruit_CAP1188(int8_t resetpin) {
+Adafruit_CAP1188::Adafruit_CAP1188(int resetpin) {
   // I2C
   _resetpin = resetpin;
   _i2c = true;
 }
 
-Adafruit_CAP1188::Adafruit_CAP1188(int8_t cspin, int8_t resetpin) {
-  // Hardware SPI
-  _cs = cspin;
-  _resetpin = resetpin;
-  _clk = -1;
-  _i2c = false;
-}
-
-bool Adafruit_CAP1188::begin(int i2caddr) {
+bool Adafruit_CAP1188::begin(uint8_t i2caddr) {
   //I2C implementation
   if (_i2c) {
     //Wire.begin();
@@ -66,19 +59,19 @@ bool Adafruit_CAP1188::begin(int i2caddr) {
   return true;
 }
 
-int  Adafruit_CAP1188::touched(void) {
-  int t = readRegister(CAP1188_SENINPUTSTATUS);
+uint8_t  Adafruit_CAP1188::touched(void) {
+  uint8_t t = readRegister(CAP1188_SENINPUTSTATUS);
   if (t) {
     writeRegister(CAP1188_MAIN, readRegister(CAP1188_MAIN) & ~CAP1188_MAIN_INT);
   }
   return t;
 }
 
-void Adafruit_CAP1188::LEDpolarity(int x) {
+void Adafruit_CAP1188::LEDpolarity(uint8_t x) {
   writeRegister(CAP1188_LEDPOL, x);
 }
 
-int Adafruit_CAP1188::readRegister(int reg) {
+uint8_t Adafruit_CAP1188::readRegister(uint8_t reg) {
   if (_i2c) {
     /*
     Wire.beginTransmission(_i2caddr);
@@ -97,7 +90,7 @@ int Adafruit_CAP1188::readRegister(int reg) {
     @brief  Writes 8-bits to the specified destination register
 */
 /**************************************************************************/
-void Adafruit_CAP1188::writeRegister(int reg, int value) {
+void Adafruit_CAP1188::writeRegister(uint8_t reg, uint8_t value) {
   if (_i2c) {
     /*Wire.beginTransmission(_i2caddr);
     i2cwrite((int)reg);

@@ -14,22 +14,12 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
-//Not using arduino so for now we get rid of this
-/*
-#if (ARDUINO >= 100)
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
-*/
-
-//If using SPI library
-#include <wiringPiSPI.h>
+#include <wiringPiI2C.h>
 
 #include <stdint.h>
 
 // The default I2C address
-#define CAP1188_I2CADDR 0x29
+#define CAP1188_I2CADDR 0x28
 
 // Some registers we use
 #define CAP1188_SENINPUTSTATUS 0x3
@@ -47,15 +37,15 @@
 class Adafruit_CAP1188 {
  public:
   // Hardware I2C
-  Adafruit_CAP1188(int8_t resetpin = -1);
+  Adafruit_CAP1188(int resetpin = -1);
 
-  bool begin(int i2caddr = CAP1188_I2CADDR);
-  int readRegister(int reg);
-  void writeRegister(int reg, int value);
-  int touched(void);
-  void LEDpolarity(int x);
+  bool begin(uint8_t i2caddr = CAP1188_I2CADDR);
+  uint8_t readRegister(uint8_t reg);
+  void writeRegister(uint8_t reg, uint8_t value);
+  uint8_t touched(void);
+  void LEDpolarity(uint8_t x);
 
  private:
   bool _i2c;
-  int8_t _i2caddr, _resetpin, _cs, _clk, _mosi, _miso;
+  int _i2caddr, _resetpin, _cs, _clk, _mosi, _miso;
 };
